@@ -1,0 +1,64 @@
+<p-toast></p-toast>
+
+<div class="surface-ground px-4 py-8 md:px-6 lg:px-8">
+  <div class="text-900 font-bold text-6xl mb-4 text-center">{{ isEditMode ? 'Editar Indicador' : 'Crear Nuevo Indicador' }}</div>
+  <div class="text-700 text-xl mb-6 text-center line-height-3">{{ isEditMode ? 'Actualiza los detalles del indicador existente' : 'Ingresa los detalles para el nuevo indicador' }}</div>
+
+  <div class="card" style="max-width: 800px; margin: auto;">
+    <form [formGroup]="indicadorForm" (ngSubmit)="Submit()" class="p-fluid">
+      <div class="grid formgrid p-fluid">
+        <div class="field mb-4 col-12">
+          <span class="p-float-label">
+            <input id="nombre" type="text" pInputText formControlName="nombre" [ngClass]="{'ng-invalid ng-dirty': submitted && indicadorForm.get('nombre')?.invalid}" />
+            <label for="nombre">Nombre del Indicador</label>
+          </span>
+          <small *ngIf="submitted && indicadorForm.get('nombre')?.invalid" class="p-error">{{getErrorMessage('nombre')}}</small>
+        </div>
+
+        <div class="field mb-4 col-12 md:col-4">
+          <span class="p-float-label">
+            <p-inputNumber id="valorEsperado" formControlName="valorEsperado"
+              [showButtons]="true" buttonLayout="horizontal" spinnerMode="horizontal"
+              decrementButtonClass="p-button-secondary" incrementButtonClass="p-button-secondary"
+              incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"
+              [ngClass]="{'ng-invalid ng-dirty': submitted && indicadorForm.get('valorEsperado')?.invalid}">
+            </p-inputNumber>
+            <label for="valorEsperado">Valor Esperado</label>
+          </span>
+          <small *ngIf="submitted && indicadorForm.get('valorEsperado')?.invalid" class="p-error">{{getErrorMessage('valorEsperado')}}</small>
+        </div>
+
+        <div class="field mb-4 col-12 md:col-4">
+          <span class="p-float-label">
+            <p-inputNumber id="valorMinimo" formControlName="valorMinimo"
+              [showButtons]="true" buttonLayout="horizontal" spinnerMode="horizontal"
+              decrementButtonClass="p-button-secondary" incrementButtonClass="p-button-secondary"
+              incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"
+              [ngClass]="{'ng-invalid ng-dirty': submitted && indicadorForm.get('valorMinimo')?.invalid}">
+            </p-inputNumber>
+            <label for="valorMinimo">Valor Mínimo</label>
+          </span>
+          <small *ngIf="submitted && indicadorForm.get('valorMinimo')?.invalid" class="p-error">{{getErrorMessage('valorMinimo')}}</small>
+        </div>
+
+        <div class="field mb-4 col-12 md:col-4">
+          <span class="p-float-label">
+            <p-inputNumber id="valorMaximo" formControlName="valorMaximo"
+              [showButtons]="true" buttonLayout="horizontal" spinnerMode="horizontal"
+              decrementButtonClass="p-button-secondary" incrementButtonClass="p-button-secondary"
+              incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"
+              [ngClass]="{'ng-invalid ng-dirty': submitted && indicadorForm.get('valorMaximo')?.invalid}">
+            </p-inputNumber>
+            <label for="valorMaximo">Valor Máximo</label>
+          </span>
+          <small *ngif="submitted && indicadorForm.get('valorMaximo')?.invalid" class="p-error">{{getErrorMessage('valorMaximo')}}</small>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap justify-content-between gap-2 mt-4">
+        <p-button label="Cancelar" icon="pi pi-times" (onClick)="Cancel()" styleClass="p-button-outlined"></p-button>
+        <p-button label="Guardar" icon="pi pi-check" type="submit" [loading]="loading"></p-button>
+      </div>
+    </form>
+  </div>
+</div>

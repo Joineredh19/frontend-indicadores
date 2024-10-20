@@ -1,0 +1,81 @@
+<div class="card">
+
+  <div class="flex justify-content-between align-items-center mb-4">
+      <h2 class="text-2xl font-bold m-0 text-primary">Indicadores</h2>
+      <p-button
+          label="Nuevo Indicador"
+          icon="pi pi-plus"
+          routerLink="indicadores/crear"
+          styleClass="p-button-success">
+      </p-button>
+  </div>
+
+  <p-table
+      [value]="indicadores"
+      [paginator]="true"
+      [rows]="10"
+      [showCurrentPageReport]="true"
+      responsiveLayout="scroll"
+      currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} indicadores"
+      [rowsPerPageOptions]="[10,25,50]"
+      styleClass="p-datatable-gridlines">
+
+      <ng-template pTemplate="header">
+          <tr>
+              <th pSortableColumn="nombre">
+                  Nombre
+                  <p-sortIcon field="nombre"></p-sortIcon>
+              </th>
+              <th pSortableColumn="valorEsperado">
+                  Valor Esperado
+                  <p-sortIcon field="valorEsperado"></p-sortIcon>
+              </th>
+              <th pSortableColumn="valorMinimo">
+                  Valor Mínimo
+                  <p-sortIcon field="valorMinimo"></p-sortIcon>
+              </th>
+              <th pSortableColumn="valorMaximo">
+                  Valor Máximo
+                  <p-sortIcon field="valorMaximo"></p-sortIcon>
+              </th>
+              <th style="width: 150px">Acciones</th>
+          </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-indicador>
+          <tr>
+              <td>{{indicador.nombre}}</td>
+              <td>{{indicador.valorEsperado}}</td>
+              <td>{{indicador.valorMinimo}}</td>
+              <td>{{indicador.valorMaximo}}</td>
+              <td>
+                  <div class="flex gap-2">
+                      <button
+                          pButton
+                          icon="pi pi-pencil"
+                          class="p-button-rounded p-button-warning p-button-outlined"
+                          [routerLink]="['indicadores/editar/', indicador.id]"
+                          pTooltip="Editar">
+                      </button>
+                      <button
+                          pButton
+                          icon="pi pi-trash"
+                          class="p-button-rounded p-button-danger p-button-outlined"
+                          (click)="confirmarEliminacion(indicador)"
+                          pTooltip="Eliminar">
+                      </button>
+                  </div>
+              </td>
+          </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+          <tr>
+              <td colspan="5" class="text-center p-4">
+                  No se encontraron indicadores.
+              </td>
+          </tr>
+      </ng-template>
+  </p-table>
+
+</div>
